@@ -3,13 +3,13 @@
 <form action="/issue/{{oneIssue._id}}?_method=PUT" method="POST">
 
     <label>Description</label>
-    <input type="text" name="description" value="oneIssue.description" />
+    <input type="text" name="description" value="{{oneIssue.description}}" />
     <label>Date</label>
-    <input type="Date" name="createdAt" value="oneIssue.createdAt"/>
+    <input type="Date" name="createdAt" value="{{oneIssue.createdAt}}"/>
     <label>Status</label>
-    <input type="text" name="status" value="oneIssue.status"/>
+    <input type="text" name="status" value="{{oneIssue.status}}"/>
     <label>Priority</label>
-    <input type="text" name="priority" value="oneIssue.priority"/>
+    <input type="text" name="priority" value="{{oneIssue.priority}}"/>
 
     <input type="submit" value="Save" />
 </form>

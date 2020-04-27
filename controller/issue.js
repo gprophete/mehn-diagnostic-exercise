@@ -19,6 +19,18 @@ issueRouter.get('/new', (req, res) => {
     res.render('issue/createIssue')
 })
 
+//Update issue
+issueRouter.get('/:id/edit', (req, res) => {
+    issueModel.getOneIssue(req.params.id)
+        .then((oneIssue) => {
+            res.render('issue/editIssue', { oneIssue })
+        })
+        .catch(err => {
+            console.log(err)
+            res.json(err)
+        })
+})
+
 //Get one issue
 issueRouter.get('/:id', (req, res) => {
     issueModel.getOneIssue(req.params.id)
@@ -34,34 +46,28 @@ issueRouter.get('/:id', (req, res) => {
 
 
 
-//New issue form
-issueRouter.get('/new', (req, res) => {
-    res.render('issue/createIssue')
-})
-
-//Update issue
-issueRouter.get('/:id/edit', (req, res) => {
-    issueModel.getOneIssue(req.params.id)
-       .then((oneIssue) => {
-           res.render('issue/editIssue', {oneIssue})
-       })
-       .catch(err => {
-           console.log(err)
-           res.json(err)
-       })
-})
-
-
 //Create issue
 issueRouter.post('/', (req, res) => {
     issueModel.createIssue(req.body)
         .then((newIssue) => {
-            res.redirect(`/issue/${newIssue._id}`)
+            res.redirect(`/issue`)
         })
         .catch((error) => {
             console.log(error)
             res.json('Failed')
 
+        })
+})
+
+// UPDATE
+issueRouter.put('/:id', (req, res) => {
+    issueModel.updateIssue(req.params.id, req.body)
+        .then(() => {
+            res.redirect(`/issue/${req.params.id}`)
+        })
+        .catch(err => {
+            console.log(err)
+            res.json(err)
         })
 })
 
@@ -77,20 +83,6 @@ issueRouter.delete('/:id', (req, res) => {
 
         })
 })
-
-//Update issue
-issueRouter.put('/:id', (req, res) => {
-    issueModel.updateIssue(req.params.id, req.body)
-        .then(() => {
-            res.redirect(`/issue/${req.params.id}`)
-        })
-        .catch((error) => {
-            console.log(error)
-            res.json('Failed')
-
-        })
-})
-
 
 
 module.exports = issueRouter

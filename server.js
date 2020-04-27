@@ -4,14 +4,14 @@ const methodOverride = require('method-override')
 const app = express()
 const port = 3000
 
-app.set('view engine', 'hbs')
-
 app.use(methodOverride('_method'))
+app.use(express.json())
 app.use(express.urlencoded())
 app.use(express.static(__dirname + '/public'))
 
+app.set('view engine', 'hbs')
 
-app.use(express.json())
+
 
 app.get('/', (req, res) => {
     res.json('ok')
